@@ -40,4 +40,17 @@ router.post('/',(req,res) => {
   })
 })
 
+router.post('/products',(req,res) => {
+  
+  // product collection에 들어 있는 모든 상품 정보를 가져오기
+  //selectAll과 같다.
+  //조건이 있을 때 find({조건})
+  //populate(컬럼 명) - 컬럼명에 대한 모든 정보를 가져올수 있다.//관계형 데이터베이스의 join과 같은 기능
+  Product.find()
+    .populate("writer")
+    .exec((err, productInfo) => {
+      if(err) return res.status(400).json({success:false, err})
+      return res.status(200).json({success:true , productInfo })
+    })
+})
 module.exports = router;
