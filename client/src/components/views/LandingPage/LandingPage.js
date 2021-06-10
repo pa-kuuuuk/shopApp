@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FaCode } from "react-icons/fa";
 import axios from 'axios';
-import {Col, Card,Row} from "antd";
+import {Col, Card,Row, Carousel} from "antd";
 import { RocketOutlined } from "@ant-design/icons";
 import Meta from 'antd/lib/card/Meta';
+import ImageSilder from '../../utils/ImageSilder';
 
 function LandingPage() {
 
@@ -30,7 +31,9 @@ function LandingPage() {
         return  <Col lg={6} md={8} xs={24}  key={index}> 
         
         <Card 
-            cover={<img style={{width:'100%', maxHeight:'150px'}} src={`http://localhost:5000/${product.images[0]}`} />}
+            cover={
+            <ImageSilder images={product.images}/>
+          }
         >
             <Meta 
                 title={product.title}
