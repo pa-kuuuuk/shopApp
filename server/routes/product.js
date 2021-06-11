@@ -47,10 +47,20 @@ router.post('/products',(req,res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
 
+  let findArgs= {};
+  for(let key in req.body.filters){
+
+    if(req.body.filters[key].length > 0){
+      findArgs[key] = req.body.filters[key];
+    }
+  }
+
+  console.log("findArgs", findArgs)
+
   //selectAll과 같다.
   //조건이 있을 때 find({조건})
   //populate(컬럼 명) - 컬럼명에 대한 모든 정보를 가져올수 있다.//관계형 데이터베이스의 join과 같은 기능
-  Product.find()
+  Product.find(findArgs)
     .populate("writer")
     .skip(skip)
     .limit(limit)
